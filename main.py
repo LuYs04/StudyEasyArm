@@ -1,9 +1,12 @@
+import os
+
 from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup, ReplyKeyboardMarkup
 from telegram.ext import Application, CommandHandler, CallbackQueryHandler, ContextTypes
 import json
 
 # Your bot token from BotFather
-TOKEN = '7681089825:AAGr-SFyODXro57n-YvEpfDw4h9-LeQJ86w'
+TOKEN = os.getenv("BOT_TOKEN")
+
 
 
 # Define a function for the /start command with buttons for all commands

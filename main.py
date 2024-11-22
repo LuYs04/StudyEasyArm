@@ -24,7 +24,7 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     # Send the start message with the inline keyboard and custom command buttons
     await update.message.reply_text('Ի՞Նչ կարիք ունեք:', reply_markup=reply_markup)
     await update.message.reply_text(
-        "",
+        "  ",
         reply_markup=command_buttons
     )
 
@@ -38,7 +38,7 @@ async def show_option_1_options(update: Update) -> None:
         [InlineKeyboardButton("Մասնավոր Բուհեր", callback_data='1_4')]
     ]
     reply_markup = InlineKeyboardMarkup(keyboard)
-    await update.callback_query.message.reply_text('', reply_markup=reply_markup)
+    await update.callback_query.edit_message_reply_markup(reply_markup=reply_markup)
 
 async def show_option_1_1_options(update: Update) -> None:
     keyboard = [
@@ -47,10 +47,10 @@ async def show_option_1_1_options(update: Update) -> None:
         [InlineKeyboardButton("Հայաստանի պետական տնտեսագիտական համալսարան (ՀՊՏՀ)", callback_data='1_1_3')],
         [InlineKeyboardButton("Երևանի պետական բժշկական համալսարան (ԵՊԲՀ)", callback_data='1_1_4')],
         [InlineKeyboardButton("Հայկական պետական մանկավարժական համալսարան(ՀՊՄՀ)", callback_data='1_1_5')],
-        [InlineKeyboardButton("Երևանի Պետական Լեզվաբանական Համալսարան, Վալերի Բրյուսովի անվան (ԵՊԼՀ)", callback_data='1_1_6')],
+        [InlineKeyboardButton("Երևանի Պետական Լեզվաբառարան, Վալերի Բրյուսովի անվան (ԵՊԼՀ)", callback_data='1_1_6')],
         [InlineKeyboardButton("Երևանի պետական կոնսերվատորիա, Կոմիտասի անվան (ԵՊԿ)", callback_data='1_1_7')],
         [InlineKeyboardButton("Երևանի թատրոնի և կինոյի պետական ինստիտուտ", callback_data='1_1_8')],
-        [InlineKeyboardButton("Ճարտարապետության և շինարարարության Հայաստանի ազգային համալսարան", callback_data='1_1_9')],
+        [InlineKeyboardButton("Ճարտարապետության և շինարարության Հայաստանի ազգային համալսարան", callback_data='1_1_9')],
         [InlineKeyboardButton("Հայաստանի ազգային ագրարային համալսարան", callback_data='1_1_10')],
         [InlineKeyboardButton("Հայաստանի գեղարվեստի պետական ակադեմիա", callback_data='1_1_11')],
         [InlineKeyboardButton("Հայաստանի Հանրապետության պետական կառավարման ակադեմիա (ՀՀ ՊԿԱ)", callback_data='1_1_12')],
@@ -58,7 +58,7 @@ async def show_option_1_1_options(update: Update) -> None:
         [InlineKeyboardButton("ՀՀ ԳԱԱ Գիտակրթական միջազգային կենտրոն", callback_data='1_1_14')]
     ]
     reply_markup = InlineKeyboardMarkup(keyboard)
-    await update.callback_query.message.reply_text('', reply_markup=reply_markup)
+    await update.callback_query.edit_message_reply_markup(reply_markup=reply_markup)
 
 # Define a function to show the second-level options for Option 2
 async def show_option_2_options(update: Update) -> None:
@@ -68,7 +68,7 @@ async def show_option_2_options(update: Update) -> None:
         [InlineKeyboardButton("Աշխատանք", callback_data='2_3')]
     ]
     reply_markup = InlineKeyboardMarkup(keyboard)
-    await update.callback_query.message.reply_text('')
+    await update.callback_query.edit_message_reply_markup(reply_markup=reply_markup)
 
 async def show_option_1_3_options(update: Update) -> None:
     keyboard = [
@@ -77,8 +77,7 @@ async def show_option_1_3_options(update: Update) -> None:
         [InlineKeyboardButton("Հայ-ռուսական համալսարան", callback_data='1_3_3')]
     ]
     reply_markup = InlineKeyboardMarkup(keyboard)
-    await update.callback_query.message.reply_text('',reply_markup=reply_markup)
-
+    await update.callback_query.edit_message_reply_markup(reply_markup=reply_markup)
 
 async def show_option_3_options(update: Update) -> None:
     keyboard = [
@@ -88,27 +87,20 @@ async def show_option_3_options(update: Update) -> None:
         [InlineKeyboardButton("Տելեգրամ ալիքներ", callback_data='3_4')]
     ]
     reply_markup = InlineKeyboardMarkup(keyboard)
-    await update.callback_query.message.reply_text('Choose an option from the second level for Option 3:',
-                                                   reply_markup=reply_markup)
+    await update.callback_query.edit_message_reply_markup(reply_markup=reply_markup)
 
-
-async def send_links(update: Update,strJson,str) -> None:
+async def send_links(update: Update, strJson: str, key: str) -> None:
     try:
         with open(strJson, 'r') as file:
             data = json.load(file)
     except FileNotFoundError:
-        await update.callback_query.message.reply_text("The data file is missing.")
         return
     except json.JSONDecodeError:
-        await update.callback_query.message.reply_text("Error reading the data file.")
         return
 
-    links = data.get(str, [])
-    message = ""
+    links = data.get(key, [])
     for link in links:
-        message = link + "\n\n"
-        await update.callback_query.message.reply_text(message)
-
+        await update.callback_query.message.reply_text(link)
 
 # Define a callback query handler to handle button clicks
 async def button_click(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
@@ -177,20 +169,18 @@ async def button_click(update: Update, context: ContextTypes.DEFAULT_TYPE) -> No
     elif query.data == '2_3':
         await send_links(update, 'Opportunities.json', 'jobs')
 
-
-    # Second-level options for Option 2
+    # Second-level options for Option 3
     elif query.data == '3_1':
         await send_links(update, 'selfStudy.json', 'books')
     elif query.data == '3_2':
         await send_links(update, 'selfStudy.json', 'podcasts')
     elif query.data == '3_3':
-        await send_links(update,'selfStudy.json','links')
+        await send_links(update, 'selfStudy.json', 'links')
     elif query.data == '3_4':
-        await send_links(update,'selfStudy.json','TgChannels')
+        await send_links(update, 'selfStudy.json', 'TgChannels')
 
     # After any action, return to the main menu
     await start(update, context)  # This ensures after any query, it will return to the start menu
-
 
 # Define the main function to start the bot
 def main():
@@ -205,7 +195,6 @@ def main():
 
     # Start the bot
     application.run_polling()
-
 
 if __name__ == '__main__':
     main()

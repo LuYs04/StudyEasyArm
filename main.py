@@ -7,6 +7,8 @@ import json
 # Your bot token from BotFather
 TOKEN = os.getenv("BOT_TOKEN")
 
+    # "7681089825:AAGr-SFyODXro57n-YvEpfDw4h9-LeQJ86w"
+
 # Define a function for the /start command with buttons for all commands
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     # Main menu buttons (inline keyboard for options)
@@ -39,7 +41,7 @@ async def show_option_1_options(update: Update) -> None:
         [InlineKeyboardButton("Մասնավոր Բուհեր", callback_data='1_4')]
     ]
     reply_markup = InlineKeyboardMarkup(keyboard)
-    await update.callback_query.message.reply_text('', reply_markup=reply_markup)
+    await update.callback_query.message.reply_text('Վիրտուալ ադմինիստրատիվ օգնական', reply_markup=reply_markup)
 
 async def show_option_1_1_options(update: Update) -> None:
     keyboard = [
@@ -59,7 +61,7 @@ async def show_option_1_1_options(update: Update) -> None:
         [InlineKeyboardButton("ՀՀ ԳԱԱ Գիտակրթական միջազգային կենտրոն", callback_data='1_1_14')]
     ]
     reply_markup = InlineKeyboardMarkup(keyboard)
-    await update.callback_query.message.reply_text('', reply_markup=reply_markup)
+    await update.callback_query.message.reply_text('Պետական Բուհեր(Երևան)', reply_markup=reply_markup)
 
 # Define a function to show the second-level options for Option 2
 async def show_option_2_options(update: Update) -> None:
@@ -69,7 +71,7 @@ async def show_option_2_options(update: Update) -> None:
         [InlineKeyboardButton("Աշխատանք", callback_data='2_3')]
     ]
     reply_markup = InlineKeyboardMarkup(keyboard)
-    await update.callback_query.message.reply_text('')
+    await update.callback_query.message.reply_text('Հնարավորությունների պահոց', reply_markup=reply_markup)
 
 async def show_option_1_3_options(update: Update) -> None:
     keyboard = [
@@ -78,8 +80,7 @@ async def show_option_1_3_options(update: Update) -> None:
         [InlineKeyboardButton("Հայ-ռուսական համալսարան", callback_data='1_3_3')]
     ]
     reply_markup = InlineKeyboardMarkup(keyboard)
-    await update.callback_query.message.reply_text('',reply_markup=reply_markup)
-
+    await update.callback_query.message.reply_text('Միջպետական Բուհեր',reply_markup=reply_markup)
 
 async def show_option_3_options(update: Update) -> None:
     keyboard = [
@@ -91,7 +92,6 @@ async def show_option_3_options(update: Update) -> None:
     reply_markup = InlineKeyboardMarkup(keyboard)
     await update.callback_query.message.reply_text('Choose an option from the second level for Option 3:',
                                                    reply_markup=reply_markup)
-
 
 async def send_links(update: Update,strJson,str) -> None:
     try:
@@ -109,7 +109,6 @@ async def send_links(update: Update,strJson,str) -> None:
     for link in links:
         message = link + "\n\n"
         await update.callback_query.message.reply_text(message)
-
 
 # Define a callback query handler to handle button clicks
 async def button_click(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
@@ -179,7 +178,6 @@ async def button_click(update: Update, context: ContextTypes.DEFAULT_TYPE) -> No
         await send_links(update, 'Opportunities.json', 'jobs')
 
 
-    # Second-level options for Option 2
     elif query.data == '3_1':
         await send_links(update, 'selfStudy.json', 'books')
     elif query.data == '3_2':

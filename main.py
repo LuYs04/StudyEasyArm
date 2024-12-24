@@ -5,9 +5,10 @@ from telegram.ext import Application, CommandHandler, CallbackQueryHandler, Cont
 import json
 
 # Your bot token from BotFather
-TOKEN = os.getenv("BOT_TOKEN")
+TOKEN = "7681089825:AAGr-SFyODXro57n-YvEpfDw4h9-LeQJ86w"
 
-    # "7681089825:AAGr-SFyODXro57n-YvEpfDw4h9-LeQJ86w"
+
+# "7681089825:AAGr-SFyODXro57n-YvEpfDw4h9-LeQJ86w"
 
 # Define a function for the /start command with buttons for all commands
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
@@ -20,19 +21,53 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     reply_markup = InlineKeyboardMarkup(keyboard)
 
     # Create a custom keyboard for all available commands in the typing section
-    command_buttons = ReplyKeyboardMarkup([
-        ['/start', '/help', '/about', '/contact'],  # Add other commands as needed
-    ], resize_keyboard=True, one_time_keyboard=True)
-
-    # Send the start message with the inline keyboard and custom command buttons
-    await update.message.reply_text('Ի՞Նչ կարիք ունեք:', reply_markup=reply_markup)
-    await update.message.reply_text(
-        "",
-        reply_markup=command_buttons
+    command_buttons = ReplyKeyboardMarkup(
+        [['/start', '/help', '/about', '/contact']], resize_keyboard=True, one_time_keyboard=False
     )
 
+    # Check whether the function was triggered by a message or a callback query
 
-# Define a function to show the second-level options for Option 1
+    if update.message:
+        await update.message.reply_text("Ընտրեք անհրաժեշտ բաժինը:", reply_markup=reply_markup)
+        await update.message.reply_text("Բոտի կառավարման վահանակները ստորև ⬇️", reply_markup=command_buttons)
+
+
+async def contact(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+    # Define the contact information message
+    contact_info = (
+        "Խնդրում ենք թողնել Ձեր կարծիքը մեր բոտի վերաբերյալ, "
+        "այն բարելավելու համար:\n"
+        "https://forms.gle/NApZjdb3Uhx2eypA9")
+
+    # Send the contact information to the user
+    if update.message:
+        await update.message.reply_text(contact_info)
+
+    # Define a function to show the second-level options for Option 1
+
+async def about(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+    about_text = (
+        "Այս բոտը ստեղծվել է օգնելու և աջակցելու ձեզ:\n"
+        "Այն տրամադրում է:\n"
+        "✅ Վիրտուալ ադմինիստրատիվ օգնականի գործիքներ\n"
+        "✅ Հնարավորությունների պահոց (կրթություն, կամավորական ծրագրեր, աշխատանք)\n"
+        "✅ Ինքնակրթության միջոցներ (գրքեր, պոդկաստներ, հղումներ, ալիքներ)\n\n"
+        "Մեր նպատակը ձեր կյանքը հեշտացնելն է:"
+    )
+    await update.message.reply_text(about_text)
+
+async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+    help_text = (
+        "Հասանելի հրամանների ցանկ:\n\n"
+        "🔹 /start - Սկիզբ\n"
+        "🔹 /help - Օգնության բաժին\n"
+        "🔹 /about - Տեղեկություններ մեր մասին\n"
+        "🔹 /contact - Հետադարձ կապ\n\n"
+        "Եթե ունեք հարցեր, խնդրում ենք կապվել մեր աջակցության թիմի հետ:"
+    )
+    await update.message.reply_text(help_text)
+
+
 async def show_option_1_options(update: Update) -> None:
     keyboard = [
         [InlineKeyboardButton("Պետական Բուհեր(Երևան)", callback_data='1_1')],
@@ -43,6 +78,7 @@ async def show_option_1_options(update: Update) -> None:
     reply_markup = InlineKeyboardMarkup(keyboard)
     await update.callback_query.message.reply_text('Վիրտուալ ադմինիստրատիվ օգնական', reply_markup=reply_markup)
 
+
 async def show_option_1_1_options(update: Update) -> None:
     keyboard = [
         [InlineKeyboardButton("Երևանի պետական համալսարան (ԵՊՀ)", callback_data='1_1_1')],
@@ -50,18 +86,22 @@ async def show_option_1_1_options(update: Update) -> None:
         [InlineKeyboardButton("Հայաստանի պետական տնտեսագիտական համալսարան (ՀՊՏՀ)", callback_data='1_1_3')],
         [InlineKeyboardButton("Երևանի պետական բժշկական համալսարան (ԵՊԲՀ)", callback_data='1_1_4')],
         [InlineKeyboardButton("Հայկական պետական մանկավարժական համալսարան(ՀՊՄՀ)", callback_data='1_1_5')],
-        [InlineKeyboardButton("Երևանի Պետական Լեզվաբանական Համալսարան, Վալերի Բրյուսովի անվան (ԵՊԼՀ)", callback_data='1_1_6')],
+        [InlineKeyboardButton("Երևանի Պետական Լեզվաբանական Համալսարան, Վալերի Բրյուսովի անվան (ԵՊԼՀ)",
+                              callback_data='1_1_6')],
         [InlineKeyboardButton("Երևանի պետական կոնսերվատորիա, Կոմիտասի անվան (ԵՊԿ)", callback_data='1_1_7')],
         [InlineKeyboardButton("Երևանի թատրոնի և կինոյի պետական ինստիտուտ", callback_data='1_1_8')],
-        [InlineKeyboardButton("Ճարտարապետության և շինարարարության Հայաստանի ազգային համալսարան", callback_data='1_1_9')],
+        [InlineKeyboardButton("Ճարտարապետության և շինարարարության Հայաստանի ազգային համալսարան",
+                              callback_data='1_1_9')],
         [InlineKeyboardButton("Հայաստանի ազգային ագրարային համալսարան", callback_data='1_1_10')],
         [InlineKeyboardButton("Հայաստանի գեղարվեստի պետական ակադեմիա", callback_data='1_1_11')],
         [InlineKeyboardButton("Հայաստանի Հանրապետության պետական կառավարման ակադեմիա (ՀՀ ՊԿԱ)", callback_data='1_1_12')],
         [InlineKeyboardButton("Ֆիզիկական կուլտուրայի հայկական պետական ինստիտուտ", callback_data='1_1_13')],
-        [InlineKeyboardButton("ՀՀ ԳԱԱ Գիտակրթական միջազգային կենտրոն", callback_data='1_1_14')]
+        [InlineKeyboardButton("ՀՀ ԳԱԱ Գիտակրթական միջազգային կենտրոն", callback_data='1_1_14')],
+        [InlineKeyboardButton("Նախորդ բաժին", callback_data='1')]
     ]
     reply_markup = InlineKeyboardMarkup(keyboard)
     await update.callback_query.message.reply_text('Պետական Բուհեր(Երևան)', reply_markup=reply_markup)
+
 
 # Define a function to show the second-level options for Option 2
 async def show_option_2_options(update: Update) -> None:
@@ -73,14 +113,17 @@ async def show_option_2_options(update: Update) -> None:
     reply_markup = InlineKeyboardMarkup(keyboard)
     await update.callback_query.message.reply_text('Հնարավորությունների պահոց', reply_markup=reply_markup)
 
+
 async def show_option_1_3_options(update: Update) -> None:
     keyboard = [
         [InlineKeyboardButton("Հայաստանի ամերիկյան համալսարան", callback_data='1_3_1')],
         [InlineKeyboardButton("Հայաստանում ֆրանսիական համալսարան", callback_data='1_3_2')],
-        [InlineKeyboardButton("Հայ-ռուսական համալսարան", callback_data='1_3_3')]
+        [InlineKeyboardButton("Հայ-ռուսական համալսարան", callback_data='1_3_3')],
+        [InlineKeyboardButton("Նախորդ բաժին", callback_data='1')]
     ]
     reply_markup = InlineKeyboardMarkup(keyboard)
-    await update.callback_query.message.reply_text('Միջպետական Բուհեր',reply_markup=reply_markup)
+    await update.callback_query.message.reply_text('Միջպետական Բուհեր', reply_markup=reply_markup)
+
 
 async def show_option_3_options(update: Update) -> None:
     keyboard = [
@@ -90,10 +133,11 @@ async def show_option_3_options(update: Update) -> None:
         [InlineKeyboardButton("Տելեգրամ ալիքներ", callback_data='3_4')]
     ]
     reply_markup = InlineKeyboardMarkup(keyboard)
-    await update.callback_query.message.reply_text('Choose an option from the second level for Option 3:',
+    await update.callback_query.message.reply_text("Ինքնակրթություն",
                                                    reply_markup=reply_markup)
 
-async def send_links(update: Update,strJson,str) -> None:
+
+async def send_links(update: Update, strJson, str) -> None:
     try:
         with open(strJson, 'r') as file:
             data = json.load(file)
@@ -109,6 +153,7 @@ async def send_links(update: Update,strJson,str) -> None:
     for link in links:
         message = link + "\n\n"
         await update.callback_query.message.reply_text(message)
+
 
 # Define a callback query handler to handle button clicks
 async def button_click(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
@@ -183,9 +228,11 @@ async def button_click(update: Update, context: ContextTypes.DEFAULT_TYPE) -> No
     elif query.data == '3_2':
         await send_links(update, 'selfStudy.json', 'podcasts')
     elif query.data == '3_3':
-        await send_links(update,'selfStudy.json','links')
+        await send_links(update, 'selfStudy.json', 'links')
     elif query.data == '3_4':
-        await send_links(update,'selfStudy.json','TgChannels')
+        await send_links(update, 'selfStudy.json', 'TgChannels')
+
+    await query.message.delete()  # Delete the previous message
 
     # After any action, return to the main menu
     await start(update, context)  # This ensures after any query, it will return to the start menu
@@ -196,15 +243,17 @@ def main():
     # Initialize the application with your bot token
     application = Application.builder().token(TOKEN).build()
 
-    # Add command handler for /start
+    # Add command handlers
     application.add_handler(CommandHandler("start", start))
-
-    # Add a callback handler for button clicks
+    application.add_handler(CommandHandler("help", help_command))
+    application.add_handler(CommandHandler("about", about))
+    application.add_handler(CommandHandler("contact", contact))
     application.add_handler(CallbackQueryHandler(button_click))
 
     # Start the bot
     application.run_polling()
 
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     main()

@@ -5,8 +5,6 @@ from telegram.ext import Application, CommandHandler, CallbackQueryHandler, Cont
 import logging
 
 # Load .env file for secure token management
-from dotenv import load_dotenv
-load_dotenv()
 
 TOKEN = os.getenv("TOKEN")
 
@@ -16,7 +14,7 @@ logger = logging.getLogger(__name__)
 # Your bot token from BotFather
 
 
-# "cc"
+# "7681089825:AAGr-SFyODXro57n-YvEpfDw4h9-LeQJ86w"
 
 # Define a function for the /start command with buttons for all commands
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:

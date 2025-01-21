@@ -1,13 +1,19 @@
 FROM python:3.12-slim
 
-WORKDIR /app  # Set a specific working directory
+# Установим рабочую директорию
+WORKDIR /app
 
-COPY requirements.txt requirements.txt
+# Скопируем файл зависимостей
+COPY requirements.txt .
 
+# Установим зависимости
 RUN pip install --no-cache-dir -r requirements.txt
 
+# Скопируем весь исходный код
 COPY . .
 
-HEALTHCHECK --interval=30m --timeout=5s --retries=3 CMD ["python", "main.py"]
+# Удалим HEALTHCHECK, так как фоновые воркеры обычно не проверяют состояние через порты
+# HEALTHCHECK --interval=30m --timeout=5s --retries=3 CMD ["python", "main.py"]
 
+# Основная команда для запуска приложения
 CMD ["python", "main.py"]

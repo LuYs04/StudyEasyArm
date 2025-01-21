@@ -8,14 +8,15 @@ import logging
 from dotenv import load_dotenv
 load_dotenv()
 
+TOKEN = os.getenv("TOKEN")
+
 # Initialize logging
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 # Your bot token from BotFather
-TOKEN = "7681089825:AAGr-SFyODXro57n-YvEpfDw4h9-LeQJ86w"
 
 
-# "7681089825:AAGr-SFyODXro57n-YvEpfDw4h9-LeQJ86w"
+# "cc"
 
 # Define a function for the /start command with buttons for all commands
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:

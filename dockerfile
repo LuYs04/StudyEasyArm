@@ -1,17 +1,16 @@
-# Используем минималистичный Python-образ
 FROM python:3.12-slim
 
-# Устанавливаем рабочую директорию
+# Set working directory
 WORKDIR /app
 
-# Копируем файл зависимостей
+# Copy dependencies
 COPY requirements.txt requirements.txt
 
-# Устанавливаем зависимости
+# Install dependencies
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Копируем весь проект в контейнер
+# Copy the rest of the project
 COPY . .
 
-# Настраиваем команду для Background Worker
+# Run the bot
 CMD ["python", "main.py"]

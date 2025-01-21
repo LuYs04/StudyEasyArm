@@ -1,9 +1,16 @@
 import os
-
+import json
 from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup, ReplyKeyboardMarkup
 from telegram.ext import Application, CommandHandler, CallbackQueryHandler, ContextTypes
-import json
+import logging
 
+# Load .env file for secure token management
+from dotenv import load_dotenv
+load_dotenv()
+
+# Initialize logging
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
 # Your bot token from BotFather
 TOKEN = "7681089825:AAGr-SFyODXro57n-YvEpfDw4h9-LeQJ86w"
 

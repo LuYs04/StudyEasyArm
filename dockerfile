@@ -1,19 +1,17 @@
+# Используем минималистичный Python-образ
 FROM python:3.12-slim
 
-# Установим рабочую директорию
+# Устанавливаем рабочую директорию
 WORKDIR /app
 
-# Скопируем файл зависимостей
-COPY requirements.txt .
+# Копируем файл зависимостей
+COPY requirements.txt requirements.txt
 
-# Установим зависимости
+# Устанавливаем зависимости
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Скопируем весь исходный код
+# Копируем весь проект в контейнер
 COPY . .
 
-# Удалим HEALTHCHECK, так как фоновые воркеры обычно не проверяют состояние через порты
-# HEALTHCHECK --interval=30m --timeout=5s --retries=3 CMD ["python", "main.py"]
-
-# Основная команда для запуска приложения
+# Настраиваем команду для Background Worker
 CMD ["python", "main.py"]

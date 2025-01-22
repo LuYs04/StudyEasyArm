@@ -1,16 +1,11 @@
-FROM python:3.12-slim
+FROM python:3.12
 
-# Set working directory
 WORKDIR /app
 
-# Copy dependencies
-COPY requirements.txt requirements.txt
+RUN python -m pip install --upgrade pip
 
-# Install dependencies
-RUN pip install --no-cache-dir -r requirements.txt
+COPY . /app/
 
-# Copy the rest of the project
-COPY . .
+RUN pip install -r requirements.txt
 
-# Run the bot
 CMD ["python", "main.py"]

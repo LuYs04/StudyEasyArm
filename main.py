@@ -10,12 +10,6 @@ load_dotenv()
 
 TOKEN = os.getenv("TOKEN")
 
-# Initialize logging
-logging.basicConfig(level=logging.INFO)
-logger = logging.getLogger(__name__)
-# Your bot token from BotFather
-
-
 # "cc"
 
 # Define a function for the /start command with buttons for all commands

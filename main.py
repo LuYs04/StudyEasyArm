@@ -1,22 +1,16 @@
 import os
 import json
+
+from dotenv import load_dotenv
 from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup, ReplyKeyboardMarkup
 from telegram.ext import Application, CommandHandler, CallbackQueryHandler, ContextTypes
 import logging
 
 # Load .env file for secure token management
-from dotenv import load_dotenv
 load_dotenv()
 
-TOKEN = os.getenv("TOKEN")
+TOKEN = os.getenv('TOKEN')
 
-# Initialize logging
-logging.basicConfig(level=logging.INFO)
-logger = logging.getLogger(__name__)
-# Your bot token from BotFather
-
-
-# "cc"
 
 # Define a function for the /start command with buttons for all commands
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:

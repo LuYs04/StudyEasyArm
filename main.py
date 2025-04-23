@@ -9,9 +9,6 @@ load_dotenv()
 
 TOKEN = os.getenv('TOKEN')
 
-
-# "7681089825:AAGr-SFyODXro57n-YvEpfDw4h9-LeQJ86w"
-
 # Define a function for the /start command with buttons for all commands
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     # Main menu buttons (inline keyboard for options)

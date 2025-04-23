@@ -1,22 +1,14 @@
 import os
-import json
+
 from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup, ReplyKeyboardMarkup
 from telegram.ext import Application, CommandHandler, CallbackQueryHandler, ContextTypes
-import logging
+import json
 
-# Load .env file for secure token management
-from dotenv import load_dotenv
-load_dotenv()
-
-TOKEN = os.getenv("TOKEN")
-
-# Initialize logging
-logging.basicConfig(level=logging.INFO)
-logger = logging.getLogger(__name__)
 # Your bot token from BotFather
+TOKEN = "7681089825:AAGr-SFyODXro57n-YvEpfDw4h9-LeQJ86w"
 
 
-# "cc"
+# "7681089825:AAGr-SFyODXro57n-YvEpfDw4h9-LeQJ86w"
 
 # Define a function for the /start command with buttons for all commands
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
@@ -36,8 +28,8 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     # Check whether the function was triggered by a message or a callback query
 
     if update.message:
-        await update.message.reply_text("Ընտրեք անհրաժեշտ բաժինը:", reply_markup=reply_markup)
-        await update.message.reply_text("Բոտի կառավարման վահանակները ստորև ⬇️", reply_markup=command_buttons)
+        await update.message.reply_text("Ի՞նչ կարիք ունեք:", reply_markup=reply_markup)
+        await update.message.reply_text("Կարող եք օգտվել ստորև գրված հրամաններից:", reply_markup=command_buttons)
 
 
 async def contact(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
@@ -55,17 +47,19 @@ async def contact(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
 
 async def about(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     about_text = (
+        "ℹ️ **Մեր մասին**:\n\n"
         "Այս բոտը ստեղծվել է օգնելու և աջակցելու ձեզ:\n"
         "Այն տրամադրում է:\n"
         "✅ Վիրտուալ ադմինիստրատիվ օգնականի գործիքներ\n"
         "✅ Հնարավորությունների պահոց (կրթություն, կամավորական ծրագրեր, աշխատանք)\n"
         "✅ Ինքնակրթության միջոցներ (գրքեր, պոդկաստներ, հղումներ, ալիքներ)\n\n"
-        "Մեր նպատակը ձեր կյանքը հեշտացնելն է:"
+        "Մեր նպատակը ձեր կյանքը հեշտացնելն է: 😊"
     )
     await update.message.reply_text(about_text)
 
 async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     help_text = (
+        "ℹ️ **Օգնություն**:\n"
         "Հասանելի հրամանների ցանկ:\n\n"
         "🔹 /start - Սկիզբ\n"
         "🔹 /help - Օգնության բաժին\n"

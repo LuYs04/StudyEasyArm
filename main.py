@@ -1,14 +1,13 @@
+import json
 import os
 
+from dotenv import load_dotenv
 from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup, ReplyKeyboardMarkup
 from telegram.ext import Application, CommandHandler, CallbackQueryHandler, ContextTypes
-import json
-from dotenv import load_dotenv
 
 load_dotenv()
 
-# Your bot token from BotFather
-TOKEN = os.getenv("MYTOKEN")
+TOKEN = os.getenv('TOKEN')
 
 
 # "7681089825:AAGr-SFyODXro57n-YvEpfDw4h9-LeQJ86w"
